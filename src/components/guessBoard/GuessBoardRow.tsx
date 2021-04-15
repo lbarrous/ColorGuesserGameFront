@@ -20,11 +20,11 @@ export const GuessBoardRow = (props: GuessBoardRowProps) => {
     hints,
     isActive,
     onChangeColor,
-    onCheckGuess
+    onCheckGuess,
   } = props;
 
   return (
-    <div className={`row ${isActive && "active"}`}>
+    <div className={`row ${isActive && "active"} `} data-testid="guessBoardRow">
       <CircleRow colors={colors} onChangeColor={onChangeColor || (() => {})} />
       <CheckButton
         allowedToCheck={allowedToCheck}

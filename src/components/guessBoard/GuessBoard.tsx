@@ -19,7 +19,7 @@ export const GuessBoard = (props: GuessBoardProps) => {
     onCheckGuess,
     activeRowColors,
     isAllowedToCheck,
-    gameFinished
+    gameFinished,
   } = props;
 
   const getEveryGuess = (guesses: Guess[]): JSX.Element[] => {
