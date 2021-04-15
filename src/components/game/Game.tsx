@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { SpinnerComponent } from 'react-element-spinner';
 import GuessAPI from "../../api/GuessAPI";
 import { Color, GameResult, Guess } from "../../typing";
 import {
@@ -24,6 +25,7 @@ export const Game = (props: GameProps) => {
   const [activeColor, setActiveColor] = useState<Color>(Color.B);
   const [gameFinished, setGameFinished] = useState<boolean>(false);
   const [hasWon, setHasWon] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [guesses, setGuesses] = useState<Guess[]>([]);
   const [attemptsLeft, setAttemptsLeft] = useState<number>(maxAttempts);
 
@@ -47,11 +49,13 @@ export const Game = (props: GameProps) => {
   );
 
   const onCheckActiveRow = useCallback(() => {
+    setIsLoading(true);
     GuessAPI.guessCombination({
       gameId: "",
       guess: activeRow
     })
       .then(response => {
+        setIsLoading(false);
         setGuesses([
           ...guesses,
           {
@@ -67,12 +71,14 @@ export const Game = (props: GameProps) => {
         }
       })
       .catch(error => {
+        setIsLoading(false);
         console.log(error);
       });
   }, [activeRow, guesses]);
 
   return (
     <div className="game-container">
+      <SpinnerComponent loading={isLoading} position="global" message="Loading" />
       <h3>{attemptsLeft} Attempts left</h3>
       <ColorChooser
         colors={getColorForChooser()}

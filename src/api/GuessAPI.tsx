@@ -6,7 +6,8 @@ class GuessApi {
 
   constructor() {
     const headers = {
-      Accept: "application/json"
+      "Accept": "application/json",
+      "Access-Control-Allow-Origin": "*"
     };
 
     this.client = axios.create({
