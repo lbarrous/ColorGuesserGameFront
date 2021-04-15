@@ -7,11 +7,10 @@ interface CircleProps {
   color: Color;
   position: number;
   onChangeColor: (color: Color, position: number) => void;
-  alreadySelectedColors: Color[];
 }
 
 export const Circle = (props: CircleProps) => {
-  const { color, position, onChangeColor, alreadySelectedColors } = props;
+  const { color, position, onChangeColor } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event: any) => {
@@ -43,7 +42,6 @@ export const Circle = (props: CircleProps) => {
         }}
       >
         <ColorChooser
-          alreadySelectedColors={alreadySelectedColors}
           onColorSelected={(color: Color, position: number) => {
             handleClose();
             return onChangeColor(color, position);

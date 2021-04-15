@@ -29,6 +29,14 @@ export const Game = (props: GameProps) => {
   const [guesses, setGuesses] = useState<Guess[]>([]);
   const [guessNumber, setGuessNumber] = useState<number>(0);
 
+  const restartGame = () => {
+    setGameFinished(false);
+    setHasWon(false);
+    setGuesses([]);
+    setGuessNumber(0);
+    setActiveRow(getInitialArrayOfColors());
+  };
+
   const onActiveRowColorChange = useCallback(
     (color: Color, position: number) => {
       setActiveRow(selectColorOnActiveRow(activeRow, color, position));
@@ -75,7 +83,7 @@ export const Game = (props: GameProps) => {
         setError(true);
         console.log(error);
       });
-  }, [activeRow, guesses]);
+  }, [activeRow, guesses, gameId, setError, setIsLoading]);
 
   return (
     <div className="game-container">
@@ -101,7 +109,10 @@ export const Game = (props: GameProps) => {
         <Solution
           hasWon={hasWon}
           lastGuess={guesses.slice(-1)[0]}
-          newGame={newGame}
+          newGame={() => {
+            newGame();
+            restartGame();
+          }}
         />
       )}
     </div>

@@ -9,12 +9,9 @@ interface CircleProps {
 export const CircleRow = (props: CircleProps) => {
   const { colors, onChangeColor } = props;
 
-  const alreadySelectedColors = colors.filter(color => color !== Color.X);
-
   const circles = colors.map((color, i) => {
     return (
       <Circle
-      alreadySelectedColors={alreadySelectedColors}
         color={color}
         position={i}
         onChangeColor={onChangeColor}

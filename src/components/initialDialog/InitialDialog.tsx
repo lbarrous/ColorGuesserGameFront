@@ -47,7 +47,7 @@ export const InitialDialog = (props: InitialDialogProps) => {
           console.log(error);
         });
     },
-    [inputValue]
+    [inputValue, onClose, onNewGame, setError, setIsLoading, setMaxAttempts]
   );
 
   const handleInput = useCallback(event => {
