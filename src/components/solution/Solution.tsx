@@ -11,11 +11,17 @@ export const Solution = (props: SolutionProps) => {
   const { hasWon, lastGuess, newGame } = props;
   const isHidden = hasWon ? "" : " hidden";
   const winnerColors = lastGuess.colorCombination.map((combination, i) => {
-    return <div className={"color-holder " + combination} key={i}></div>;
+    return (
+      <div
+        className={"color-holder " + combination}
+        key={i}
+        data-testid="solution-color"
+      ></div>
+    );
   });
 
   return (
-    <div className="solution colors">
+    <div className="solution colors" data-testid="solution-container">
       <div className={isHidden}>
         <p>Solution:</p>
         {winnerColors}

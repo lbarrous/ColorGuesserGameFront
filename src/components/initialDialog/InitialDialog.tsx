@@ -4,7 +4,7 @@ import {
   DialogContent,
   DialogTitle,
   FormGroup,
-  TextField
+  TextField,
 } from "@material-ui/core";
 import { useCallback, useState } from "react";
 import GuessAPI from "../../api/GuessAPI";
@@ -25,23 +25,23 @@ export const InitialDialog = (props: InitialDialogProps) => {
     onNewGame,
     setIsLoading,
     setMaxAttempts,
-    setError
+    setError,
   } = props;
 
   const handleNewGame = useCallback(
-    event => {
+    (event) => {
       event.preventDefault();
       onClose();
       setIsLoading(true);
       GuessAPI.getNewGame({
-        maxAttempts: inputValue
+        maxAttempts: inputValue,
       })
-        .then(response => {
+        .then((response) => {
           setIsLoading(false);
           setMaxAttempts(inputValue || 0);
           onNewGame(response.data);
         })
-        .catch(error => {
+        .catch((error) => {
           setError(true);
           setIsLoading(false);
           console.log(error);
@@ -50,7 +50,7 @@ export const InitialDialog = (props: InitialDialogProps) => {
     [inputValue, onClose, onNewGame, setError, setIsLoading, setMaxAttempts]
   );
 
-  const handleInput = useCallback(event => {
+  const handleInput = useCallback((event) => {
     setInputValue(event.target.value);
   }, []);
 
@@ -63,7 +63,7 @@ export const InitialDialog = (props: InitialDialogProps) => {
     >
       <DialogTitle id="simple-dialog-title">Start new Game</DialogTitle>
       <DialogContent>
-        <form onSubmit={handleNewGame}>
+        <form data-testid="newGameForm" onSubmit={handleNewGame}>
           <FormGroup>
             <TextField
               label="Max attempts: "

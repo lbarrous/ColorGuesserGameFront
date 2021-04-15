@@ -5,7 +5,7 @@ import { Color, GameResult, Guess } from "../../typing";
 import {
   checkIfRowIsAllowedToCHeck,
   getInitialArrayOfColors,
-  selectColorOnActiveRow
+  selectColorOnActiveRow,
 } from "../../utils";
 import { GuessBoard } from "../guessBoard/GuessBoard";
 import { Solution } from "../solution/Solution";
@@ -48,17 +48,17 @@ export const Game = (props: GameProps) => {
     setIsLoading(true);
     GuessAPI.guessCombination({
       gameId: gameId,
-      guess: activeRow
+      guess: activeRow,
     })
-      .then(response => {
+      .then((response) => {
         setIsLoading(false);
         if (response.data.hits) {
           setGuesses(
             guesses.concat([
               {
                 colorCombination: activeRow,
-                hints: response.data.correctColors
-              }
+                hints: response.data.correctColors,
+              },
             ])
           );
 
@@ -69,8 +69,8 @@ export const Game = (props: GameProps) => {
             guesses.concat([
               {
                 colorCombination: activeRow,
-                hints: response.data === GameResult.WON ? NUMBER_OF_COLORS : 0
-              }
+                hints: response.data === GameResult.WON ? NUMBER_OF_COLORS : 0,
+              },
             ])
           );
 
@@ -78,7 +78,7 @@ export const Game = (props: GameProps) => {
           setHasWon(response.data === GameResult.WON);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         setIsLoading(false);
         setError(true);
         console.log(error);
@@ -86,7 +86,7 @@ export const Game = (props: GameProps) => {
   }, [activeRow, guesses, gameId, setError, setIsLoading]);
 
   return (
-    <div className="game-container">
+    <div className="game-board" data-testid="game-board">
       <h3>
         {!gameFinished
           ? gameId && `${maxAttempts - guessNumber} Attempts left`

@@ -12,7 +12,7 @@ export const GameContainer = () => {
   const [hasError, setHasError] = useState<boolean>(false);
 
   return (
-    <div className="GameContainer">
+    <div className="GameContainer" data-testid="game-container">
       <NotificationAlert
         isDisplayed={hasError}
         onClose={() => {
