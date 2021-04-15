@@ -51,6 +51,5 @@ export const GuessBoard = (props: GuessBoardProps) => {
   };
 
   const rowsToDisplay = getEveryGuess(guesses).concat(getActiveRow() || []);
-  console.log("GuessBoard -> guesses", guesses);
   return <div className="board">{rowsToDisplay}</div>;
 };

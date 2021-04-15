@@ -9,6 +9,7 @@ export const CheckButton = (props: CheckButtonProps) => {
   const { allowedToCheck, onCheckColors } = props;
   return (
     <div
+      data-testid="checkButton"
       className={`ok-button ${allowedToCheck ? "" : "disabled"}`}
       onClick={() => allowedToCheck && onCheckColors()}
     >

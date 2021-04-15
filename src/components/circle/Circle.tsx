@@ -26,7 +26,11 @@ export const Circle = (props: CircleProps) => {
 
   return (
     <div>
-      <span className={"peg " + color} onClick={handleClick}></span>
+      <span
+        data-testid="circle"
+        className={"peg " + color}
+        onClick={handleClick}
+      ></span>
       <Popover
         id={id}
         open={open}

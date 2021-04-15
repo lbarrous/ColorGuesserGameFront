@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SpinnerComponent } from "react-element-spinner";
-import { NotificationAlert } from "../components/alert/Alert";
+import { NotificationAlert } from "../components/alert/NotificationAlert";
 import { Game } from "../components/game/Game";
 import { InitialDialog } from "../components/initialDialog/InitialDialog";
 

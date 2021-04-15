@@ -9,12 +9,10 @@ interface HintsProps {
 
 export const Hints = (props: HintsProps) => {
   const { hints } = props;
-  console.log("Hints -> hints", hints);
 
   const hintsArray = Array(hints)
     .fill(Hint.CORRECT)
     .concat(Array(NUMBER_OF_COLORS - hints).fill(Hint.INCORRECT));
-  console.log("Hints -> hintsArray", hintsArray);
   return (
     <div className="hints">
       {hintsArray.map((hint, i) => {

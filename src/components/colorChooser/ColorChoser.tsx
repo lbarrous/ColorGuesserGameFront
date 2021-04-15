@@ -12,6 +12,7 @@ export const ColorChooser = (props: ColorChooserProps) => {
   const allColors = getColorForChooser().map((color: Color) => {
     return (
       <div
+        data-testid={`color-${color}`}
         className={"color-holder " + color}
         key={color}
         onClick={() => onColorSelected(color, position)}
@@ -19,5 +20,9 @@ export const ColorChooser = (props: ColorChooserProps) => {
     );
   });
 
-  return <div className="colors">{allColors}</div>;
+  return (
+    <div data-testid="colorChooser" className="colors">
+      {allColors}
+    </div>
+  );
 };

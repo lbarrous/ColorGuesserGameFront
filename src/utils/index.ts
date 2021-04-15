@@ -1,12 +1,8 @@
 import { NUMBER_OF_COLORS } from "../constants";
-import { Color, Hint } from "../typing";
+import { Color } from "../typing";
 
 export const getInitialArrayOfColors = (): Color[] => {
   return Array(NUMBER_OF_COLORS).fill(Color.X);
-};
-
-export const getInitialArrayOfHints = (): Hint[] => {
-  return Array(NUMBER_OF_COLORS).fill(Hint.INCORRECT);
 };
 
 export const getColorForChooser = (): Color[] => {
