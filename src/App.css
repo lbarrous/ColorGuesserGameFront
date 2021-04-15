@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Cabin');
+@import url("https://fonts.googleapis.com/css?family=Cabin");
 
 html {
   box-sizing: border-box;
-  background-color: #E2DADD;
-  font-family: 'Cabin', sans-serif;
+  background-color: #e2dadd;
+  font-family: "Cabin", sans-serif;
 }
 
-#root {  
+#root {
   text-align: center;
 }
 
 #root h2 {
   font-size: 2em;
-  margin: 0.67em 0 0.15em 0;  
+  margin: 0.67em 0 0.15em 0;
 }
 
 .rules {
@@ -37,7 +37,12 @@ html {
   color: #666;
 }
 
-.colors .color-holder, .board .peg {
+.colors {
+  margin: 0.5rem;
+}
+
+.colors .color-holder,
+.board .peg {
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -45,27 +50,32 @@ html {
   margin-right: 8px;
   border-radius: 21px;
   cursor: pointer;
-  background-color: #F0EAED;
-} 
-
-.colors .red, .circles .red {
-  background-color: #E42244;
+  background-color: #f0eaed;
 }
 
-.colors .green, .circles .green {
-  background-color: #70C030;
+.colors .red,
+.circles .red {
+  background-color: #e42244;
 }
 
-.colors .yellow, .circles .yellow {
-  background-color: #FFBB36;
+.colors .green,
+.circles .green {
+  background-color: #70c030;
 }
 
-.colors .blue, .circles .blue {
-  background-color: #36BEDD;
+.colors .yellow,
+.circles .yellow {
+  background-color: #ffbb36;
 }
 
-.colors .purple, .circles .purple {
-  background-color: #9F66DF;
+.colors .blue,
+.circles .blue {
+  background-color: #36bedd;
+}
+
+.colors .purple,
+.circles .purple {
+  background-color: #9f66df;
 }
 
 .colors .active {
@@ -74,12 +84,11 @@ html {
 }
 
 .board {
-  margin-top: 15px;  
+  margin-top: 15px;
 }
 
 .board div {
   display: inline-block;
-  margin-right: 5px;
   vertical-align: bottom;
 }
 
@@ -87,16 +96,16 @@ html {
   margin-left: 5px;
 }
 
-.board .ok-button {    
+.board .ok-button {
   font-size: 0.9em;
-  padding: 16px 0;  
-  color: #33AA88;
+  padding: 16px 0;
+  color: #33aa88;
   margin-right: 12px;
   cursor: pointer;
 }
 
 .board .ok-button.disabled {
-  color: #CCC0C6;
+  color: #ccc0c6;
   cursor: default;
 }
 
@@ -107,37 +116,33 @@ html {
 
 .board .row {
   display: block;
-  border: 1px solid #D0CACD;
+  border: 1px solid #d0cacd;
   margin: 0 auto 3px auto;
   max-width: 400px;
 }
 
 .board .row.active {
-  border:2px solid #BBAAAA;
-  background-color: #FFF9FC;
+  border: 2px solid #bbaaaa;
+  background-color: #fff9fc;
 }
 
 .board .hints {
   margin-right: 0;
-} 
+}
 
 .board .hints span {
   display: inline-block;
   width: 8px;
   height: 8px;
   border: 1px solid #777;
-  background-color: #F0EAED;  
+  background-color: #f0eaed;
   margin: 15px 2px;
   font-size: 0.75em;
   padding: 0;
 }
 
-.board .hints span.exact {
-  background-color: #00BB22;  
-}
-
-.board .hints span.partial {
-  background-color: #DDBB22;  
+.board .hints span.correct {
+  background-color: #00bb22;
 }
 
 .solution p {

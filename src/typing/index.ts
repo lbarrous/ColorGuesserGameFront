@@ -1,35 +1,33 @@
 export enum Color {
-    R="red",
-    B="blue",
-    G="green",
-    Y="yellow",
-    P="purple",
-    X="unselected"
+  R = "red",
+  B = "blue",
+  G = "green",
+  Y = "yellow",
+  P = "purple",
+  X = "unselected"
 }
 
 export enum Hint {
-    TOTALLY_CORRECT="2",
-    PARTIALLY_CORRECT="1",
-    INCORRECT="0"
+  CORRECT = "correct",
+  INCORRECT = "incorrect"
 }
 
 export interface Guess {
-    colorCombination: Color[];
-    hint: Hint[];
+  colorCombination: Color[];
+  hints: number;
 }
 
 export interface APIRequesObject {
-    maxAttempts?: number;
-    gameId?: string;
-    guess?: string[];
+  maxAttempts?: number;
+  gameId?: string;
+  guess?: string[];
 }
 
 export interface APIResponseObject {
-    gameId?: string;
-
+  gameId?: string;
 }
 
 export enum GameResult {
-    WON="WON",
-    LOST="LOST",
+  WON = "WON",
+  LOST = "LOST"
 }

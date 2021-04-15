@@ -16,7 +16,6 @@ export const Solution = (props: SolutionProps) => {
 
   return (
     <div className="solution colors">
-      <div>{hasWon ? "You Win!!" : "You Lost :("}</div>
       <div className={isHidden}>
         <p>Solution:</p>
         {winnerColors}

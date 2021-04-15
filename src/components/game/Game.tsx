@@ -1,103 +1,107 @@
 import React, { useCallback, useState } from "react";
-import { SpinnerComponent } from 'react-element-spinner';
 import GuessAPI from "../../api/GuessAPI";
+import { NUMBER_OF_COLORS } from "../../constants";
 import { Color, GameResult, Guess } from "../../typing";
 import {
   checkIfRowIsAllowedToCHeck,
-  getColorForChooser,
   getInitialArrayOfColors,
-  getInitialArrayOfHints
+  selectColorOnActiveRow
 } from "../../utils";
-import { ColorChooser } from "../colorChooser/ColorChoser";
 import { GuessBoard } from "../guessBoard/GuessBoard";
 import { Solution } from "../solution/Solution";
 
 interface GameProps {
   maxAttempts: number;
   gameId: string;
+  setIsLoading: (value: boolean) => void;
+  newGame: () => void;
+  setError: (value: boolean) => void;
 }
 
 export const Game = (props: GameProps) => {
-  const { maxAttempts, gameId } = props;
+  const { maxAttempts, gameId, setIsLoading, newGame, setError } = props;
+
   const [activeRow, setActiveRow] = useState<Color[]>(
     getInitialArrayOfColors()
   );
-  const [activeColor, setActiveColor] = useState<Color>(Color.B);
   const [gameFinished, setGameFinished] = useState<boolean>(false);
   const [hasWon, setHasWon] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [guesses, setGuesses] = useState<Guess[]>([]);
-  const [attemptsLeft, setAttemptsLeft] = useState<number>(maxAttempts);
-
-  const onColorChooserChange = useCallback(
-    (color: Color) => {
-      setActiveColor(color);
-    },
-    []
-  );
+  const [guessNumber, setGuessNumber] = useState<number>(0);
 
   const onActiveRowColorChange = useCallback(
-    (position: number) => {
-      const newActiveRow = [
-        ...activeRow.slice(0, position),
-        activeColor,
-        ...activeRow.slice(position + 1)
-      ];
-      setActiveRow(newActiveRow);
+    (color: Color, position: number) => {
+      setActiveRow(selectColorOnActiveRow(activeRow, color, position));
     },
-    [activeRow, activeColor]
+    [activeRow]
   );
 
   const onCheckActiveRow = useCallback(() => {
     setIsLoading(true);
     GuessAPI.guessCombination({
-      gameId: "",
+      gameId: gameId,
       guess: activeRow
     })
       .then(response => {
         setIsLoading(false);
-        setGuesses([
-          ...guesses,
-          {
-            colorCombination: activeRow,
-            hint: getInitialArrayOfHints()
-          }
-        ]);
         if (response.data.hits) {
-          setAttemptsLeft(response.data.hits);
+          setGuesses(
+            guesses.concat([
+              {
+                colorCombination: activeRow,
+                hints: response.data.correctColors
+              }
+            ])
+          );
+
+          setGuessNumber(response.data.hits);
+          setActiveRow(getInitialArrayOfColors());
         } else {
+          setGuesses(
+            guesses.concat([
+              {
+                colorCombination: activeRow,
+                hints: response.data === GameResult.WON ? NUMBER_OF_COLORS : 0
+              }
+            ])
+          );
+
           setGameFinished(true);
           setHasWon(response.data === GameResult.WON);
         }
       })
       .catch(error => {
         setIsLoading(false);
+        setError(true);
         console.log(error);
       });
   }, [activeRow, guesses]);
 
   return (
     <div className="game-container">
-      <SpinnerComponent loading={isLoading} position="global" message="Loading" />
-      <h3>{attemptsLeft} Attempts left</h3>
-      <ColorChooser
-        colors={getColorForChooser()}
-        activeColor={activeColor}
-        onColorSelected={onColorChooserChange}
-      />
+      <h3>
+        {!gameFinished
+          ? gameId && `${maxAttempts - guessNumber} Attempts left`
+          : hasWon
+          ? "You Won!!"
+          : "You Lost :("}
+      </h3>
       <GuessBoard
         guesses={guesses}
         maxAttempts={maxAttempts}
         onChangeColor={onActiveRowColorChange}
         onCheckGuess={onCheckActiveRow}
         activeRowColors={activeRow}
-        isAllowedToCheck={checkIfRowIsAllowedToCHeck(activeRow)}
+        gameFinished={gameFinished}
+        isAllowedToCheck={
+          checkIfRowIsAllowedToCHeck(activeRow) && !gameFinished
+        }
       />
       {gameFinished && (
         <Solution
           hasWon={hasWon}
           lastGuess={guesses.slice(-1)[0]}
-          newGame={() => {}}
+          newGame={newGame}
         />
       )}
     </div>

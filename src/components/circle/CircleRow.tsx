@@ -4,14 +4,17 @@ import { Circle } from "./Circle";
 
 interface CircleProps {
   colors: Color[];
-  onChangeColor: (position: number) => void | undefined;
+  onChangeColor: (color: Color, position: number) => void | undefined;
 }
 export const CircleRow = (props: CircleProps) => {
   const { colors, onChangeColor } = props;
 
+  const alreadySelectedColors = colors.filter(color => color !== Color.X);
+
   const circles = colors.map((color, i) => {
     return (
       <Circle
+      alreadySelectedColors={alreadySelectedColors}
         color={color}
         position={i}
         onChangeColor={onChangeColor}
