@@ -2,6 +2,7 @@ import { Popover } from "@material-ui/core";
 import React from "react";
 import { Color } from "../../typing";
 import { ColorChooser } from "../colorChooser/ColorChoser";
+import { StyledCircle } from "./styles";
 
 interface CircleProps {
   color: Color;
@@ -26,11 +27,7 @@ export const Circle = (props: CircleProps) => {
 
   return (
     <div>
-      <span
-        data-testid="circle"
-        className={"peg " + color}
-        onClick={handleClick}
-      ></span>
+      <StyledCircle data-testid="circle" onClick={handleClick}></StyledCircle>
       <Popover
         id={id}
         open={open}
@@ -38,11 +35,11 @@ export const Circle = (props: CircleProps) => {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center"
+          horizontal: "center",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center"
+          horizontal: "center",
         }}
       >
         <ColorChooser

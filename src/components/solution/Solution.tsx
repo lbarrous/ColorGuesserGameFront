@@ -1,5 +1,6 @@
 import React from "react";
 import { Guess } from "../../typing";
+import { StyledSolutionCircle, StyledSolutionContainer } from "./styles";
 
 interface SolutionProps {
   lastGuess: Guess;
@@ -9,23 +10,22 @@ interface SolutionProps {
 
 export const Solution = (props: SolutionProps) => {
   const { hasWon, lastGuess, newGame } = props;
-  const isHidden = hasWon ? "" : " hidden";
   const winnerColors = lastGuess.colorCombination.map((combination, i) => {
     return (
-      <div
-        className={"color-holder " + combination}
+      <StyledSolutionCircle
+        color={combination}
         key={i}
         data-testid="solution-color"
-      ></div>
+      ></StyledSolutionCircle>
     );
   });
 
   return (
-    <div className="solution colors" data-testid="solution-container">
-      <div className={isHidden}>
+    <div data-testid="solution-container">
+      <StyledSolutionContainer hidden={!hasWon}>
         <p>Solution:</p>
         {winnerColors}
-      </div>
+      </StyledSolutionContainer>
       <div>
         <a onClick={newGame}> Play Again?</a>
       </div>
