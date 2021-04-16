@@ -3,6 +3,7 @@ import { Color } from "../../typing";
 import { CheckButton } from "../checkButton/CheckButton";
 import { CircleRow } from "../circle/CircleRow";
 import { Hints } from "../hints/Hints";
+import { StyledGuessBoardRow } from "./styles";
 
 interface GuessBoardRowProps {
   colors: Color[];
@@ -24,13 +25,13 @@ export const GuessBoardRow = (props: GuessBoardRowProps) => {
   } = props;
 
   return (
-    <div className={`row ${isActive && "active"} `} data-testid="guessBoardRow">
+    <StyledGuessBoardRow isActive={isActive} data-testid="guessBoardRow">
       <CircleRow colors={colors} onChangeColor={onChangeColor || (() => {})} />
       <CheckButton
         allowedToCheck={allowedToCheck}
         onCheckColors={onCheckGuess || (() => {})}
       />
       <Hints hints={hints} />
-    </div>
+    </StyledGuessBoardRow>
   );
 };

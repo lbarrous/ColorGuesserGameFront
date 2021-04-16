@@ -1,4 +1,5 @@
 import React from "react";
+import { StyledCheckButton } from "./styles";
 
 interface CheckButtonProps {
   allowedToCheck: boolean;
@@ -8,12 +9,12 @@ interface CheckButtonProps {
 export const CheckButton = (props: CheckButtonProps) => {
   const { allowedToCheck, onCheckColors } = props;
   return (
-    <div
+    <StyledCheckButton
+      disabled={!allowedToCheck}
       data-testid="checkButton"
-      className={`ok-button ${allowedToCheck ? "" : "disabled"}`}
       onClick={() => allowedToCheck && onCheckColors()}
     >
       check
-    </div>
+    </StyledCheckButton>
   );
 };
