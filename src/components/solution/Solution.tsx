@@ -1,6 +1,10 @@
 import React from "react";
 import { Guess } from "../../typing";
-import { StyledSolutionCircle, StyledSolutionContainer } from "./styles";
+import {
+  StyledNewGameLink,
+  StyledSolutionCircle,
+  StyledSolutionContainer,
+} from "./styles";
 
 interface SolutionProps {
   lastGuess: Guess;
@@ -27,7 +31,7 @@ export const Solution = (props: SolutionProps) => {
         {winnerColors}
       </StyledSolutionContainer>
       <div>
-        <a onClick={newGame}> Play Again?</a>
+        <StyledNewGameLink onClick={newGame}> Play Again?</StyledNewGameLink>
       </div>
     </div>
   );

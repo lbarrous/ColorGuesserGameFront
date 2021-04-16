@@ -2,7 +2,7 @@ import { Popover } from "@material-ui/core";
 import React from "react";
 import { Color } from "../../typing";
 import { ColorChooser } from "../colorChooser/ColorChoser";
-import { StyledCircle } from "./styles";
+import { StyledCircle, StyledCircleContainer } from "./styles";
 
 interface CircleProps {
   color: Color;
@@ -26,8 +26,12 @@ export const Circle = (props: CircleProps) => {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div>
-      <StyledCircle data-testid="circle" onClick={handleClick}></StyledCircle>
+    <StyledCircleContainer>
+      <StyledCircle
+        color={color}
+        data-testid="circle"
+        onClick={handleClick}
+      ></StyledCircle>
       <Popover
         id={id}
         open={open}
@@ -50,6 +54,6 @@ export const Circle = (props: CircleProps) => {
           position={position}
         />
       </Popover>
-    </div>
+    </StyledCircleContainer>
   );
 };

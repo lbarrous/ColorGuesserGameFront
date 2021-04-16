@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Color } from "../../typing";
 
-export const StyledCircle = styled.span`
+export const StyledCircle = styled.span<{ color: Color }>`
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -8,9 +9,16 @@ export const StyledCircle = styled.span`
   margin-right: 8px;
   border-radius: 21px;
   cursor: pointer;
-  background-color: #f0eaed;
+  ${(props) => `background-color: ${props.color}`}
+`;
+
+export const StyledCircleContainer = styled.div`
+  display: inline-block;
+  vertical-align: bottom;
 `;
 
 export const StyledCircleRow = styled.div`
   margin-left: 5px;
+  display: inline-block;
+  vertical-align: bottom;
 `;

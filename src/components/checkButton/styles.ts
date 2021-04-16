@@ -5,6 +5,8 @@ export const StyledCheckButton = styled.div<{ disabled: boolean }>`
   padding: 16px 0;
   color: #33aa88;
   margin-right: 12px;
+  display: inline-block;
+  vertical-align: bottom;
 
   ${(props) =>
     props.disabled

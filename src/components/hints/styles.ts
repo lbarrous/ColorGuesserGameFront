@@ -16,4 +16,6 @@ export const StyledHint = styled.span<{ hint: Hint }>`
 
 export const StyledHintContainer = styled.div`
   margin-right: 0;
+  display: inline-block;
+  vertical-align: bottom;
 `;
