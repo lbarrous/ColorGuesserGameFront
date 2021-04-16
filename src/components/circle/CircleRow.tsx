@@ -1,6 +1,7 @@
 import React from "react";
 import { Color } from "../../typing";
 import { Circle } from "./Circle";
+import { StyledCircleRow } from "./styles";
 
 interface CircleProps {
   colors: Color[];
@@ -20,5 +21,5 @@ export const CircleRow = (props: CircleProps) => {
     );
   });
 
-  return <div className="circles"> {circles} </div>;
+  return <StyledCircleRow> {circles} </StyledCircleRow>;
 };

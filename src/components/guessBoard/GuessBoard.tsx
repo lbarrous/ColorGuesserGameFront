@@ -1,6 +1,7 @@
 import React from "react";
 import { Color, Guess } from "../../typing";
 import { GuessBoardRow } from "./GuessBoardRow";
+import { StyledGGuessBoard } from "./styles";
 
 interface GuessBoardProps {
   maxAttempts: number;
@@ -51,5 +52,5 @@ export const GuessBoard = (props: GuessBoardProps) => {
   };
 
   const rowsToDisplay = getEveryGuess(guesses).concat(getActiveRow() || []);
-  return <div className="board">{rowsToDisplay}</div>;
+  return <StyledGGuessBoard>{rowsToDisplay}</StyledGGuessBoard>;
 };

@@ -7,11 +7,11 @@ describe("CheckButton component", () => {
     render(<CheckButton allowedToCheck={true} onCheckColors={jest.fn()} />);
     expect(screen.getByTestId("checkButton")).toBeInTheDocument();
   });
-  it("shows the button in active mode", () => {
+  it("shows the button in inactive mode", () => {
     const { container } = render(
       <CheckButton allowedToCheck={false} onCheckColors={jest.fn()} />
     );
-    expect(container.children[0].className).toEqual("ok-button disabled");
+    expect(container.children[0]).toHaveAttribute("disabled");
   });
   it("fires onclick on active mode", () => {
     const onClick = jest.fn();

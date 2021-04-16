@@ -10,7 +10,7 @@ export const getColorForChooser = (): Color[] => {
 };
 
 export const checkIfRowIsAllowedToCHeck = (colors: Color[]): boolean => {
-  return colors.every(color => color !== Color.X);
+  return colors.every((color) => color !== Color.X);
 };
 
 export const selectColorOnActiveRow = (
@@ -29,13 +29,13 @@ export const selectColorOnActiveRow = (
       indexOfColorAlreadyPresent < position ? Color.X : newColor,
       ...activeRow.slice(initialIndex + 1, lastIndex),
       indexOfColorAlreadyPresent < position ? newColor : Color.X,
-      ...activeRow.slice(lastIndex + 1)
+      ...activeRow.slice(lastIndex + 1),
     ];
   } else {
     return [
       ...activeRow.slice(0, position),
       newColor,
-      ...activeRow.slice(position + 1)
+      ...activeRow.slice(position + 1),
     ];
   }
 };

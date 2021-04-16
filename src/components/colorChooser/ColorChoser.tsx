@@ -1,6 +1,7 @@
 import React from "react";
 import { Color } from "../../typing";
 import { getColorForChooser } from "../../utils";
+import { StyledColor } from "./styles";
 
 interface ColorChooserProps {
   position: number;
@@ -11,18 +12,15 @@ export const ColorChooser = (props: ColorChooserProps) => {
   const { position, onColorSelected } = props;
   const allColors = getColorForChooser().map((color: Color) => {
     return (
-      <div
+      <StyledColor
+        color={color}
         data-testid={`color-${color}`}
         className={"color-holder " + color}
         key={color}
         onClick={() => onColorSelected(color, position)}
-      ></div>
+      ></StyledColor>
     );
   });
 
-  return (
-    <div data-testid="colorChooser" className="colors">
-      {allColors}
-    </div>
-  );
+  return <div data-testid="colorChooser">{allColors}</div>;
 };
