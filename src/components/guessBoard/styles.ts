@@ -7,8 +7,8 @@ export const StyledGGuessBoard = styled.div`
 export const StyledGuessBoardRow = styled.div<{ isActive: boolean }>`
   display: block;
 
-  margin: 0 auto 3px auto;
-  max-width: 400px;
+  margin: 0 auto 0.188rem auto;
+  max-width: 25rem;
 
   ${(props) =>
     props.isActive

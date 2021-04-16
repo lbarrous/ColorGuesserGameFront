@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const StyledCheckButton = styled.div<{ disabled: boolean }>`
   font-size: 0.9em;
-  padding: 16px 0;
+  padding: 1rem 0;
   color: #33aa88;
-  margin-right: 12px;
+  margin-right: 0.75rem;
   display: inline-block;
   vertical-align: bottom;
 

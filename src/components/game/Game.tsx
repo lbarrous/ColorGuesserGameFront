@@ -89,7 +89,7 @@ export const Game = (props: GameProps) => {
     <div data-testid="game-board">
       <h3>
         {!gameFinished
-          ? gameId && `${maxAttempts - guessNumber} Attempts left`
+          ? gameId && `${maxAttempts - guessNumber} Attempt(s) left`
           : hasWon
           ? "You Won!!"
           : "You Lost :("}
