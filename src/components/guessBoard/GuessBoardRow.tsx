@@ -26,7 +26,11 @@ export const GuessBoardRow = (props: GuessBoardRowProps) => {
 
   return (
     <StyledGuessBoardRow isActive={isActive} data-testid="guessBoardRow">
-      <CircleRow colors={colors} onChangeColor={onChangeColor || (() => {})} />
+      <CircleRow
+        isActive={isActive}
+        colors={colors}
+        onChangeColor={onChangeColor || (() => {})}
+      />
       <CheckButton
         allowedToCheck={allowedToCheck}
         onCheckColors={onCheckGuess || (() => {})}

@@ -5,14 +5,16 @@ import { StyledCircleRow } from "./styles";
 
 interface CircleProps {
   colors: Color[];
+  isActive: boolean;
   onChangeColor: (color: Color, position: number) => void | undefined;
 }
 export const CircleRow = (props: CircleProps) => {
-  const { colors, onChangeColor } = props;
+  const { colors, onChangeColor, isActive } = props;
 
   const circles = colors.map((color, i) => {
     return (
       <Circle
+        isFromActiveRow={isActive}
         color={color}
         position={i}
         onChangeColor={onChangeColor}

@@ -7,19 +7,20 @@ import { StyledCircle, StyledCircleContainer } from "./styles";
 interface CircleProps {
   color: Color;
   position: number;
+  isFromActiveRow: boolean;
   onChangeColor: (color: Color, position: number) => void;
 }
 
 export const Circle = (props: CircleProps) => {
-  const { color, position, onChangeColor } = props;
+  const { color, position, onChangeColor, isFromActiveRow } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event: any) => {
-    setAnchorEl(event.currentTarget);
+    isFromActiveRow && setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    isFromActiveRow && setAnchorEl(null);
   };
 
   const open = Boolean(anchorEl);
@@ -28,6 +29,7 @@ export const Circle = (props: CircleProps) => {
   return (
     <StyledCircleContainer>
       <StyledCircle
+        isActive={isFromActiveRow}
         color={color}
         data-testid="circle"
         onClick={handleClick}
