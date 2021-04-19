@@ -28,6 +28,7 @@ export const Game = (props: GameProps) => {
   const [hasWon, setHasWon] = useState<boolean>(false);
   const [guesses, setGuesses] = useState<Guess[]>([]);
   const [guessNumber, setGuessNumber] = useState<number>(0);
+  const [correctSolution, setCorrectSolution] = useState<Color[]>([]);
 
   const restartGame = () => {
     setGameFinished(false);
@@ -53,6 +54,7 @@ export const Game = (props: GameProps) => {
       .then((response) => {
         setIsLoading(false);
         if (response.data.hits) {
+          // Game not finished yet (available attemps left)
           setGuesses(
             guesses.concat([
               {
@@ -65,17 +67,24 @@ export const Game = (props: GameProps) => {
           setGuessNumber(response.data.hits);
           setActiveRow(getInitialArrayOfColors());
         } else {
-          setGuesses(
-            guesses.concat([
-              {
-                colorCombination: activeRow,
-                hints: response.data === GameResult.WON ? NUMBER_OF_COLORS : 0,
-              },
-            ])
+          // Game finished (Solution display)
+          const lastGuess = {
+            colorCombination: activeRow,
+            hints:
+              response.data.resultOfGame === GameResult.WON
+                ? NUMBER_OF_COLORS
+                : 0,
+          };
+          setGuesses(guesses.concat([lastGuess]));
+
+          setCorrectSolution(
+            response.data.resultOfGame === GameResult.WON
+              ? lastGuess.colorCombination
+              : response.data.solution
           );
 
           setGameFinished(true);
-          setHasWon(response.data === GameResult.WON);
+          setHasWon(response.data.resultOfGame === GameResult.WON);
         }
       })
       .catch((error) => {
@@ -108,7 +117,7 @@ export const Game = (props: GameProps) => {
       {gameFinished && (
         <Solution
           hasWon={hasWon}
-          lastGuess={guesses.slice(-1)[0]}
+          solution={correctSolution}
           newGame={() => {
             newGame();
             restartGame();

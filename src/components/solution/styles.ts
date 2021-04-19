@@ -14,10 +14,6 @@ export const StyledSolutionCircle = styled.div<{ color: Color }>`
   ${(props) => `background-color: ${props.color}`}
 `;
 
-export const StyledSolutionContainer = styled.div<{ hidden: boolean }>`
-  ${(props) => props.hidden && `display: none;`}
-`;
-
 export const StyledNewGameLink = styled.a`
   cursor: pointer;
 `;
