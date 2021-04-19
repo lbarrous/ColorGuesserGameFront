@@ -8,10 +8,7 @@ describe("Solution component", () => {
     render(
       <Solution
         hasWon={true}
-        lastGuess={{
-          colorCombination: [Color.B, Color.G, Color.P, Color.R, Color.Y],
-          hints: 5,
-        }}
+        solution={[Color.B, Color.G, Color.P, Color.R, Color.Y]}
         newGame={jest.fn()}
       />
     );

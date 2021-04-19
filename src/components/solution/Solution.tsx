@@ -1,23 +1,19 @@
 import React from "react";
-import { Guess } from "../../typing";
-import {
-  StyledNewGameLink,
-  StyledSolutionCircle,
-  StyledSolutionContainer,
-} from "./styles";
+import { Color } from "../../typing";
+import { StyledNewGameLink, StyledSolutionCircle } from "./styles";
 
 interface SolutionProps {
-  lastGuess: Guess;
+  solution: Color[];
   hasWon: boolean;
   newGame: () => void;
 }
 
 export const Solution = (props: SolutionProps) => {
-  const { hasWon, lastGuess, newGame } = props;
-  const winnerColors = lastGuess.colorCombination.map((combination, i) => {
+  const { hasWon, solution, newGame } = props;
+  const winnerColors = solution.map((color, i) => {
     return (
       <StyledSolutionCircle
-        color={combination}
+        color={color}
         key={i}
         data-testid="solution-color"
       ></StyledSolutionCircle>
@@ -26,10 +22,10 @@ export const Solution = (props: SolutionProps) => {
 
   return (
     <div data-testid="solution-container">
-      <StyledSolutionContainer hidden={!hasWon}>
+      <div>
         <p>Solution:</p>
         {winnerColors}
-      </StyledSolutionContainer>
+      </div>
       <div>
         <StyledNewGameLink onClick={newGame}> Play Again?</StyledNewGameLink>
       </div>
